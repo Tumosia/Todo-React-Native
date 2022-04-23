@@ -160,10 +160,10 @@ const bodyStyles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.primary,
-    padding: 20,
+    display: "flex",
     borderRadius: 100,
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
   },
