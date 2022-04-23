@@ -1,15 +1,25 @@
 import React from "react";
 import {
-    Image, Platform, Pressable, StatusBar, StyleSheet,
-    Text, TextInput, TouchableOpacity, View
+  Image,
+  Button,
+  Platform,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import colors from "../config/colors";
 import Swipe from "./swipable";
-
+// import DateTimePicker from "@react-native-community/datetimepicker";
 
 function HomeScreen() {
   const [text, setText] = React.useState("");
-  const [data, setData] = React.useState();
+  // const [data, setData] = React.useState();
+  const [open, setOpen] = React.useState(false);
+  const [date, setDate] = React.useState(new Date());
 
   const save = () => {
     console.log(text);
@@ -21,13 +31,29 @@ function HomeScreen() {
   return (
     <View style={globalStyle.container}>
       <View style={navabrStyles.navbar}>
-         <Image
-            style={navabrStyles.logo}
-            source={require("../assets/icon.png")}
-          /> 
+        <Image
+          style={navabrStyles.logo}
+          source={require("../assets/icon.png")}
+        />
         <Text style={navabrStyles.header}>Task Manager </Text>
       </View>
       <View style={bodyStyles.body}>
+        <Button title="Open" onPress={() => setOpen(true)} />
+        {/* <DateTimePicker
+          modal
+          mode="time"
+          value={new Date()}
+          open={open}
+          date={date}
+          onConfirm={(date) => {
+            setOpen(false);
+            setDate(date);
+          }}
+          onCancel={() => {
+            setOpen(false);
+          }}
+        /> */}
+        {/* <DatePicker date={date} onDateChange={setDate} /> */}
         <View style={bodyStyles.input}>
           <TextInput
             style={bodyStyles.typin}
@@ -35,9 +61,9 @@ function HomeScreen() {
             onChange={(e) => setText(e.nativeEvent.text)}
             value={text}
           />
-        <TouchableOpacity onPress={save} style={bodyStyles.button}>
+          <TouchableOpacity onPress={save} style={bodyStyles.button}>
             <Text style={bodyStyles.buttonText}>+</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </View>
         <View style={bodyStyles.table}>
           <View style={bodyStyles.table}>
@@ -86,7 +112,7 @@ const navabrStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.primary,
-    borderRadius:28,
+    borderRadius: 28,
   },
   header: {
     color: colors.secondary,
@@ -136,19 +162,17 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: colors.primary,
     padding: 20,
     borderRadius: 100,
-    width:60,
-    height:60,
+    width: 60,
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
-},
-buttonText: {
+  },
+  buttonText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
-    marginTop:0,
-
-},
-    
+    marginTop: 0,
+  },
 });
 const footerStyles = StyleSheet.create({
   footer: {
